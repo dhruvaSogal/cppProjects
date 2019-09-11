@@ -16,9 +16,10 @@ int main(){
 
       }
       if(guess<randomnumber){
-	
+	cout << "Too Low" <<endl;
+	guesses++;
 
-
+      }
 
       }
 
