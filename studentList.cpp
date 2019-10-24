@@ -1,3 +1,5 @@
+//Dhruva Sogal student list
+//this program can create a list of students, students can be added, deleted, and the list of students can be printed
 #include<iostream>
 #include<vector>
 using namespace std;
