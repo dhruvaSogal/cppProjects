@@ -78,7 +78,7 @@ void print(vector<student*>*students){ //print method
   for(int i=0; i< students->size(); i++){
     cout<<(*students)[i]->firstName<<",";
     cout<<(*students)[i]->lastName<<",";
-    cout<<setprecision(2)<<(*students)[i]->gpa<<",";
+    cout<<setprecision(3)<<(*students)[i]->gpa<<",";
     cout<<(*students)[i]->id<<endl;
 
 
@@ -94,8 +94,8 @@ void deleteStudent(vector<student*>* students){ //delete method
   cin>>idDelete;
   for(int i =0; i<students->size();i++){
     if ((*students)[i]->id == idDelete){
-      students->erase(students->begin()+i);
       delete((*students)[i]);
+      students->erase(students->begin()+i);
       
     }
 
