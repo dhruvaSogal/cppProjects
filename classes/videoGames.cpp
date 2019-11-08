@@ -1,10 +1,13 @@
 #include<iostream>
 using namespace std;
-class videoGame: public media{
-public:
-  char publisher[];
-  float rating;
+#include "media.h"
+#include "videoGames.h"
+videoGames :: videoGames(char* publisher, float rating){
+  cout<<"Enter publisher name"<<endl;
+  cin>>publisher;
+  cout<<"Enter rating"<<endl;
+  cin>>rating;
 
 
 
-};
+}
