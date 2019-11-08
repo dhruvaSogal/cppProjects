@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+#include<cstring>
+struct student{
+  char firstName[];
+  char lastName[];
+  int id;
+  float gpa;
+  
+  
+
+};
+void add(vector<student*>* students);
+void print(vector<student*>* students);
+void deleteStudent(vector<student*>* students);
+
+
+
+
+int main(){
+  vector<student*>* students = new vector <student*>;
+  char input[];
+  add(students);
+  
+
+
+
+
+
+}
+void add(vector<student*>* students){
+  student* temp = new student;
+  cout<<"Enter First Name"<<endl;
+  cin>>temp->firstName;
+  cout<<"Enter Last Name"<<endl;
+  cin>>temp->lastName;
+  cout<<"Enter id"<<endl;
+  cin>>temp->id;
+  cout<<"Enter GPA"<<endl;
+  cin>>temp->gpa;
+  (*students).push_back(temp);
+  
+
+
+}

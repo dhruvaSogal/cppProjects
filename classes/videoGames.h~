@@ -1,0 +1,8 @@
+#ifndef MOVIES_H
+#define MOVIES_H
+#include<iostream>
+class videoGames{
+  char* publisher;
+  int rating;
+};
+#endif

@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+class music{
+public:
+  int year;
+  float duration;
+  char publisher[20];
+  char title[20];
+  char artist [20];
+  
+  
+
+
+
+};

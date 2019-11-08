@@ -1,0 +1,11 @@
+#indef MUSIC_H
+#define MUSIC_H
+#include<iostream>
+class music{
+  char* artist;
+  char* publisher;
+  float duration;
+
+
+
+};

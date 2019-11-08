@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+class movie{
+public:
+  char title[];
+  char director[];
+  int year;
+  float duration;
+  
+
+
+
+};
