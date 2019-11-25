@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+#include "room.h"
+using namespace std;
+int main(){
+  rooms **room = new rooms*[16];
+  //16 rooms to be added to array
+  room[0] = new rooms();
+  room[0]->setDescription("This is the entry of an ancient house in portland");
+  room[1] = new rooms();
+  room[1]->setDescription("You are in the foyer");
+  room[2]= new rooms();
+  room[2]->setDescription("You are in a living room adorned with fancy furniture");
+  room[3]= new rooms();
+  room[3]->setDescription("You are in a cozy den");
+  room[4]= new rooms();
+  room[4]->setDescription("You are in a drawing room");
+  room[5]= new rooms();
+  room[5]->setDescription("You are in a billiards room");
+  room[6]= new rooms();
+  room[6]->setDescription("You have found the olympic size indoor pool");
+  room[7]= new rooms();
+  room[7]->setDescription("You are in the lounge");
+  room[8]= new rooms();
+  room[8]->setDescription("You are in the theater");
+  room[9]= new rooms();
+  room[9]->setDescription("You are in the spiral staircase");
+  room[10]= new rooms();
+  room[10]->setDescription("You are in the master bedroom");
+  room[11]= new rooms();
+  room[11]->setDescription("You are in the guest bedroom");
+  room[12]= new rooms();
+  room[12]->setDescription("You are in the childs room. Don't stop on legos!");
+  room[13]= new rooms();
+  room[13]->setDescription("You are in the upstairs lounge");
+  room[14]= new rooms();
+  room[14]->setDescription("You are on the balcony");
+  room[15]= new rooms();
+  room[15]->setDescription("You are in the balcony pool");
+  
+
+  rooms currentRoom = (*room)[0];
+  int combinedWorth = 0;
+  vector <items> myItems = new vector<items>;
+  //win if in intial room with combined worth of 20 across items
+  
+  
+
+}
