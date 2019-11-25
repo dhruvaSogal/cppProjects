@@ -1,10 +1,21 @@
-#inndef MUSIC_H
-#define MUSIC_H
+
 #include<iostream>
-class music{
- char*artist;
- int publisher;
+class music: public media{
+public:
+  music();
+  ~music();
+  int getType();
+  float getDuration();
+  void display();
+  char* getArtist();
+  char* getPublisher();
+  
+
+
+private:
+ char* artist;
+ char* publisher;
  float duration;
 
 };
-#endif
+

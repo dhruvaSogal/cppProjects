@@ -1,13 +1,30 @@
 #include<iostream>
+#include "media.h"
+#include "movies.h"
 using namespace std;
-class media{
-public:
-  char title[];
-  int year;
+media :: media(){
+  cout<<"Enter media title"<<endl;
+  cin.ignore();
+  cin.getline(title,90);
+  cout<<"Enter year of release"<<endl;
+  cin>>year;
+  
+  
   
 
 
+}
 
+int media::getYear()
+{
+  return year;
+}
+char* media::getTitle()
+{
+  return title;
+  
+  }
+void media::display(){
 
 
 

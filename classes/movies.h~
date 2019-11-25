@@ -1,10 +1,16 @@
-#ifndef MOVIES_H
-#define MOVIES_H
+
 #include<iostream>
-class movies{
+class movies : public media{
+public:
+ movies();
+ float getRating();
+  void display();
+  float getDuration();
+  char* getDirector();
+private:
   char* director;
-  int rating;
   float duration;
+  float rating;
   
   
 
@@ -12,4 +18,4 @@ class movies{
 
 
 };
-#endif
+

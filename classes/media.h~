@@ -1,11 +1,17 @@
-#indef MUSIC_H
-#define MUSIC_H
+#ifndef MEDIA_H
+#define MEDIA_H
 #include<iostream>
-class music{
-  char* artist;
-  char* publisher;
-  float duration;
+class media{
+public:
+  media();
+  int getType(int type);
+  int getYear(int year);
+  char* getTitle(char* title);
+protected:
+  char* title;
+  int year;
 
 
 
 };
+#endif
