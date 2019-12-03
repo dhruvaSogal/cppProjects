@@ -1,0 +1,21 @@
+#include<iostream>
+#include<vector>
+#include "items.h"
+using namespace std;
+item :: item(){
+ 
+
+
+
+}
+void item:: setName(const char* itemName){
+  name = itemName;
+
+
+}
+void item:: getName(){
+  cout<<name<<endl;
+
+}
+
+

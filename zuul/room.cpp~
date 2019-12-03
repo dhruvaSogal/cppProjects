@@ -1,0 +1,56 @@
+#include<iostream>
+#include<vector>
+#include "room.h"
+#include "items.h"
+using namespace std;
+room :: room(){
+  exits = new map<char, room*>;
+  items = new vector<item*>;
+  
+
+
+
+
+
+}
+char* room :: getDescription(){
+  cout<<description<<endl;
+  cout<<"h"<<endl;
+
+
+}
+char* room :: getItems(){
+  for(int i = 0; i<items->size(); i++){
+    (*items)[i]->getName();
+
+  }
+
+}
+void room :: setDescription(const char* roomDescription){
+  description = roomDescription; 
+
+}
+
+void room :: setExits(char direction, room* nextRoom){
+
+  exits->insert(pair<char, room*>(direction, nextRoom));
+  
+  
+
+}
+void room :: dropItems(item* droppedItem){
+  items->push_back(droppedItem);
+
+
+}
+//get map method
+map<char, room*>* room :: getMap(){
+  return exits;
+
+
+}
+vector<item*>* room :: returnItems(){
+  return items; 
+
+
+}
