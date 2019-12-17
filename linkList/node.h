@@ -5,13 +5,15 @@
 using namespace std;
 class node{
  public: 
-  node();
+  node(student*);
   ~node();
-  void setValue(int);
-  int getValue();
+  void setValue(student*);
+  student* getStudent();
   void setNext(node*);
+  node* getNext();
+  
  private:
-  student* value;
+  student* student;
   node* next;
   
 

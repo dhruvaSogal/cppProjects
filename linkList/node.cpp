@@ -2,20 +2,20 @@
 #include"node.h"
 #include"student.h"
 using namespace std;
-node :: node(){
-  value = new student;
+node::node(student* newstudent){
+  student = newstudent;
   next = NULL;
 
 }
-node :: ~node((){
+node :: ~node(){
+  next = NULL;
+  delete student;
 
-  }
-void node::setValue(student* newvalue){
-  next = newvalue;
+
 
 }
-student* node::getValue(){
-  return value;
+student* node::getStudent(){
+  return student;
 
 }
 void node::setNext(node* newNext){
