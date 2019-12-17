@@ -11,6 +11,8 @@ int main(){
   node* node1 = new node(joe);
   node* node2 = new node(bob);
   node* node3 = new node(jack);
+  
+  
   (node1->getStudent())->setId(4);
   (node2->getStudent())->setId(5);
   (node3->getStudent())->setId(6);

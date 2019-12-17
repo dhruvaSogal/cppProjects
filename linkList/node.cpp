@@ -1,21 +1,25 @@
 #include<iostream>
 #include"node.h"
-#include"student.h"
+
 using namespace std;
 node::node(student* newstudent){
-  student = newstudent;
+  Student = newstudent;
   next = NULL;
 
-}
+  }
+
+
+
+
 node :: ~node(){
   next = NULL;
-  delete student;
+  delete Student;
 
 
 
 }
 student* node::getStudent(){
-  return student;
+  return Student;
 
 }
 void node::setNext(node* newNext){
@@ -24,4 +28,5 @@ void node::setNext(node* newNext){
   node* node :: getNext(){
     return next;
   }
+
 
