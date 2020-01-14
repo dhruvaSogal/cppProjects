@@ -1,0 +1,13 @@
+#include<iostream>
+#include "student.h"
+using namespace std;
+student :: student(char* newName, int newid, float newGPA){
+  newName = name;
+  newid = id;
+  newGPA = GPA;
+
+
+
+
+}
+

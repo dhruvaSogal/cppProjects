@@ -1,0 +1,24 @@
+//DHRUVA SOGAL STARTED 12/19/2019
+
+#include "node.h"
+#include<iostream>
+using namespace std;
+int main(){
+  void add (student* newstudent, node* head){
+    node* current = head;
+    if(current == NULL){
+      head = new node();
+      head->setValue(newstudent);
+    }
+    
+
+
+
+
+  }
+
+
+
+
+
+}
