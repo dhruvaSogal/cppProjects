@@ -21,4 +21,8 @@ float Student:: getGPA(){
 int Student::getId(){
   return id;
 }
+Student::~Student(){
+
+
+}
 

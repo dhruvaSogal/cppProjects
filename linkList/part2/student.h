@@ -4,6 +4,7 @@ using namespace std;
 class Student {
  public:
   Student(char*, int, float);
+  ~Student();
   char* getName();
   float getGPA();
   int getId();

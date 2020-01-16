@@ -1,7 +1,7 @@
 #include<iostream>
 #include "student.h"
 using namespace std;
-student :: student(char* newName, int newid, float newGPA){
+Student :: Student(char* newName, int newid, float newGPA){
   newName = name;
   newid = id;
   newGPA = GPA;
@@ -9,5 +9,16 @@ student :: student(char* newName, int newid, float newGPA){
 
 
 
+}
+char* Student:: getName(){
+  return name;
+
+}
+float Student:: getGPA(){
+  return GPA;
+
+}
+int Student::getId(){
+  return id;
 }
 
