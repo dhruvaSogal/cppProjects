@@ -13,7 +13,7 @@ int main(){
   cin>>command;
   if(command=='a'){
   
- char studentname[90];
+  char* studentname = new char[90];
   int studentid;
   float studentGPA;
   cout<<"Enter Student Name"<<endl;
@@ -27,6 +27,7 @@ int main(){
   add(newStudent, head, head);
  
   }
+  
   if(command == 'd'){
 
     deleteStudent(head, head);
@@ -47,40 +48,50 @@ int main(){
 
 
 void add (Student* newstudent, Node* &head, Node* current){
-  int id = newstudent->getId();
+  cout<<"adding"<<endl;
   if(current==NULL){
+    cout<<"first thing added"<<endl;
     head = new Node(newstudent);
-    
-
+    cout<<"student added"<<endl;
   }
+  
   else{
     if(head->getNext()==NULL){
-    //end of list
+    cout<<"alone in list"<<endl;
+    //alone in list
     if(current->getStudent()->getId() < newstudent->getId()){
+      cout<<"added on end"<<endl;
       current->setNext(new Node(newstudent));
+      cout<<"student added"<<endl;
  }
     else if(current->getStudent()->getId() > newstudent->getId()){
+      cout<<"added before current"<<endl;
       head = new Node(newstudent);
       head->setNext(current);
+      cout<<"student added"<<endl;
 
     }
-    else{ //not alone in the list
+    else{ 
       if(current->getStudent()->getId() > newstudent->getId()){
 	head = new Node(newstudent);
-	head->setNext(current); 
+	head->setNext(current);
+	cout<<"student added"<<endl;
 
       }
       if(current->getNext() == NULL){ //youve reached the end
 	current->setNext(new Node(newstudent));
+	cout<<"student added"<<endl;
 
       }
       if(newstudent->getId() > current->getStudent()->getId() && newstudent->getId() < current->getNext()->getStudent()->getId()){
 	Node* temp = new Node(newstudent);
 	temp->setNext(current->getNext());
 	current->setNext(temp);
+	cout<<"student added"<<endl;
 
       }
       else{
+	cout<<"moving to next current"<<endl;
 	add(newstudent, head, current->getNext());
 
 
@@ -99,6 +110,7 @@ void add (Student* newstudent, Node* &head, Node* current){
 
 }
   }
+  cout<<"end of add"<<endl;
 }
 void deleteStudent(Node* head, Node* current){ //call with head as both parameters
   int key;
@@ -113,7 +125,7 @@ void deleteStudent(Node* head, Node* current){ //call with head as both paramete
   if(current->getStudent()->getId()==key){
     cout<<current->getStudent()->getName()<<endl;
     cout<<current->getStudent()->getId()<<endl;
-    printf("%2" , current->getStudent()->getGPA());
+    cout<<current->getStudent()->getGPA();
     
     
 
@@ -133,16 +145,15 @@ void deleteStudent(Node* head, Node* current){ //call with head as both paramete
 }
 void printStudents(Node* head, Node* current){ //call with head as both parameters
   if(!(current==NULL)){  
-    //cout<<current->getStudent()->getName()<<endl;
-cout<<current->getStudent()->getId()<<endl;
-//cout<<current->getStudent()->getGPA();
+    cout<<current->getStudent()->getName()<<","<<
+      current->getStudent()->getId()<<","<<current->getStudent()->getGPA()<<endl;
  if(!(current->getNext()==NULL)){
    printStudents(head, current->getNext());
 
  }
   }
   if(current==NULL){
-    cout<<"null"<<endl;
+    cout<<"You Have Not Added Any Students"<<endl;
 
   }
 

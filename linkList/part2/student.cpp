@@ -2,9 +2,9 @@
 #include "student.h"
 using namespace std;
 Student :: Student(char* newName, int newid, float newGPA){
-  newName = name;
-  newid = id;
-  newGPA = GPA;
+ name = newName;
+ id = newid;
+ GPA = newGPA;
 
 
 
