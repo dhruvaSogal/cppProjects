@@ -1,18 +1,21 @@
+//STudent class with members name, last name, GPA, and ID
 #include <iostream>
 using namespace std;
 
 class Student {
  public:
-  Student(char*, int, float);
+  Student(char*, char*, int, double);
   ~Student();
   char* getName();
-  float getGPA();
+  char* getlastname();
+  double getGPA();
   int getId();
 
 
  private:
   char* name;
-  float GPA;
+  char* lastname;
+  double GPA;
   int id;
 
 
