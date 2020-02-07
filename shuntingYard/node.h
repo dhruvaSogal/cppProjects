@@ -3,7 +3,7 @@
 using namespace std;
 class node{
  public:
-  node(char k);
+  node(char* k);
   ~node();
   node* getLeft();
   node* getRight();

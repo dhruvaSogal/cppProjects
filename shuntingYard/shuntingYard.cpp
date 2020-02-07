@@ -6,16 +6,27 @@ int main(){
   node* tail = NULL;
   node* stackhead = NULL;
   node* stacktail = NULL;
-  char[90] read;
+  char* read = new char[90];
   cout<<"Enter your math equation"<<endl;
   cin.getline(read, 90);
+  for(int i = 0; i< sizeof(read) / sizeof(char*)){
+    //do nothing if space, stack for operator, q for numbers
+    if((*read[i]) == ' '){
+      //do nothing
 
-  for(int i = 0; i< strlen(read) ; i++){
-    
+    }
+    else if((*read[i]) == '*' || '+' ||'-'||'/'||'^'){
+      //push
+    }
+    else{
+      //enqueu
+
+
+    }
 
   }
- 
-}
+  
+} 
 
 void enqueu(node* &head, node* current, char  x, node* &tail){ //add things after head FIFO
   if(current->getNext() != NULL){
@@ -30,26 +41,19 @@ void enqueu(node* &head, node* current, char  x, node* &tail){ //add things afte
   
 }
 node* dequeu(node* &head, node* current, char x, node* &tail){
-  if(current->getNext != tail){
-    dequeu(head, current->getNext(),x , tail)
-      
-  }
-  else{
-    node* k = tail;
-    tail = current;
-    return k;
-
-
-  }
-
-
-
-
+  node* k = head;
+  head = head->getNext();
+  return k;
 }
-void push(){ FILO
-  //add new head
-    node* temp = new node(x);
-
+void push(node* &stackhead, node* current, char x, node* &stacktail){ //FILO, add things before head
+  node* k = head;
+  head = current;
+  current->setNext(k);
+}
+node* pop(node* stackhead, node* current, node* &stacktail){
+  node* k = head;
+  head = current;
+  current->setNext(k);
 
 }
 
