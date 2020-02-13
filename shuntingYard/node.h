@@ -10,14 +10,17 @@ class node{
   node* getnext();
   void setLeft(node* k);
   void setNext(node* k);
+  node* getNext();
   void setRight(node*k);
   char getValue();
+  char* getToken();
+  void setToken(char* k);
  private:
   node* left;
   node* right;
   node* next;
-  char token;
-
+  char* token;
+  
 
 
 
