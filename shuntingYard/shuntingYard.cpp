@@ -6,9 +6,9 @@ int main(){
   node* tail = NULL;
   node* stackhead = NULL;
   node* stacktail = NULL;
-  char* read = new char[90];
+
   cout<<"Enter your math equation"<<endl;
-  cin.getline(read, 90);
+  
   
 } 
 
@@ -66,9 +66,22 @@ void readInput(char* read){
  keep track of two tokens, until you find space then take in those and make a char array
  then token one goes to point after space
    */
-  char k;
-  int counter;
-  for(int i = 0; i< ? ; i++){
+  char* read = new char[90];
+  cin.getline(read, 90);
+
+
+  for(int i = 0; i< (sizeof(read)/sizeof(read[0])); i++){
+    if((*read)[i] >= 30 && (*read)[i] <= 39 && (*read)[i+1] == ' '){  //single digit number
+      char* temp = (*read)[i];
+      enqueu(head, head, temp, tail);
+
+    }
+    
+
+
+  }
+  
+  
     /*
       if char[i] != ' ' char* array = char[i]+char[i+1]...
       once you hit a space then new char*
@@ -76,7 +89,7 @@ void readInput(char* read){
 
 
     
-  }
+  
   
 }
 
