@@ -1,6 +1,6 @@
 /*
-after 2/20 AT: ensure that the stack works--> push an operator --> print stack (just push and print from read function)
- 2) Do shunting yard algorithm --> copy wikipedia algorithm --> translate into postfix
+
+ 2) Do shunting yard algorithm --> copy wikipedia algorithm --> translate into postfix, will need to test pop
  3) Do binary expression tree --> print it?
  4) Read the binary expression tree
 
@@ -14,18 +14,21 @@ void enqueu(node* &head, node* current, char* x, node* &tail);
 node* dequeu(node* &head, node* current);
 void push(node* &stackhead, node* current, node* &stacktail, char* x);
 node* pop(node* stackhead, node* current, node* &stacktail);
-void readInput(node* &head, node* &tail);
+void readInput(node* &head, node* &tail, node* &stackhead, node* &stacktail);
 void printqueu(node* head, node* tail, node* current);
+void stackprint(node* stackhead, node* stacktail, node* current);
 
 int main(){
+  
   node* head = NULL;
   node* tail = NULL;
   node* stackhead = NULL;
   node* stacktail = NULL;
 
   cout<<"Enter your math equation"<<endl;
-  readInput(head, tail);
+  readInput(head, tail, stackhead, stacktail);
   printqueu(head, tail, head);
+  stackprint(stackhead, stacktail, stackhead);
 
 
   
@@ -104,10 +107,7 @@ char peek(){
 
 
 void readInput(node* &head, node* &tail, node* &stackhead, node* &stacktail){
-  /*
- keep track of two tokens, until you find space then take in those and make a char array
- then token one goes to point after space
-   */
+ 
   char* read = new char[90];
   cin.getline(read, 90);
   int size = strlen(read);
@@ -115,15 +115,15 @@ void readInput(node* &head, node* &tail, node* &stackhead, node* &stacktail){
 
 
   for(int i = 0; i < size; i++){
-    if((int)read[i] >= 48 && (int)read[i] <= 57){
+    if((int)read[i] >= 48 && (int)read[i] <= 57){ //if it is a number
       char* temp = new char[3];
      
-        if(read[i+1] == ' '){
+      if(read[i+1] == ' '){       // if it is independant
 	  temp[0] = read[i];
 	  temp[1] = '\0';
 
       }
-	else{
+      else{ //if two digit number
 	 temp[0] = read[i];
 	 temp[1] = read[i+1];
 	 temp[2] = '\0';
@@ -131,7 +131,7 @@ void readInput(node* &head, node* &tail, node* &stackhead, node* &stacktail){
 
 	}
 
-	if()
+       
       
       
       enqueu(head, head, temp, tail);
@@ -139,10 +139,19 @@ void readInput(node* &head, node* &tail, node* &stackhead, node* &stacktail){
       
 
     }
-    
-    
+
+    if (read[i] == 'x' || read[i] == '/' || read[i] == '+' || read[i] == '-' || read[i] == '^'|| read[i] == '(' || read[i] == ')'){ //if it is an operator
+
+      
 
 
+
+
+
+
+
+    }//close if operator
+    
   }
    
 }
@@ -160,8 +169,8 @@ void printqueu(node* head, node* tail, node* current){
 }
 
 void stackprint(node* stackhead, node* stacktail, node* current){
-  if(current ! = NULL){
-    cout<<current->getToken()<<"token"<<endl;
+  if(current != NULL){
+    cout<<current->getToken()<<"stack token"<<endl;
     if(current != stacktail){
       stackprint(stackhead, stacktail, current->getNext());
 
