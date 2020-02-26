@@ -1,9 +1,9 @@
-//node class with left and right pointers
+//node class with left and right pointers as well as next. usable in both list and tree
 #include<iostream>
 using namespace std;
 class node{
- public:
-  node(char* k);
+public: //functions
+  node(char* k); 
   ~node();
   node* getLeft();
   node* getRight();
@@ -15,7 +15,7 @@ class node{
   char getValue();
   char* getToken();
   void setToken(char* k);
- private:
+private: //values
   node* left;
   node* right;
   node* next;
