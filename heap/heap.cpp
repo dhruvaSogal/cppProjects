@@ -1,15 +1,16 @@
 //Dhruva Sogal Heap Project
+#include<math.h>
 #include<iostream>
 //#include "node.h"
 #include <fstream>
 using namespace std;
-void read(int* &input, int &count);
-void heapify(int* &input, int &count);
+void read(int* &input, int &count, int &index);
+void heapify(int &index, int* &input);
 int main(){
   int count = 0;
-  int index = 1;
+  int index = 0;
   int* input = new int[100];
-  read(input, count);
+  read(input, count, index);
 
 
 
@@ -17,7 +18,7 @@ int main(){
 
 }
 
-void read(int* &input, int &count){
+void read(int* &input, int &count, int &index){
   cout<<"Enter 1 for manual entry or 2 for file entry"<<endl;
   int entry = 0;
   cin>>entry;
@@ -36,26 +37,32 @@ void read(int* &input, int &count){
       cout<<"That file does not exist"<<endl;
 
        }
+    
     else{
       int a;
       //char a;
       int x  = 0;
       //int count = 0;
+      index = 1;
       while(infile >> a){
+       
 	//input[x] = a;
-	cout<<"a: "<<a<<endl;
-	input[count + 1] = a;
-	cout<<"count: "<<count<<endl;
-	count++;
+	//cout<<"a: "<<a<<endl;
+	input[index] = a;
+	//sort until smaller than parent or in 1 spot
+	if(index != 1){
+	heapify(index, input);
+	}
 
-      }
-      for(int i = 0; i < count + 1; i++ ){
-	cout<<input[i]<<endl;
-      }
+      
+	//cout<<"count: "<<count<<
+      
+      
+  
+	index ++;
       
 
-
-    }
+      }
 
     
 
@@ -69,20 +76,26 @@ void read(int* &input, int &count){
 
 
 
-}
-
-
-void heapify(int* &input, int index){
-  for(int i = 0 ; i < count + 1 ; i++){
-    if() //check against parent
-
-
-
   }
-
-
-
-
-
-
+  for(int i = 0; i < 4 ; i++){
+    cout<<input[i]<<endl;
+  }
 }
+
+void heapify(int &index, int* &input){
+  cout<<index<<endl;
+  if(input[index] > input[(int)floor(index/2)]){
+    //swap
+    int newindex = (int)floor(index/2);
+    int temp = input[index];
+    input[index] = input[newindex];
+    input[newindex] = temp;
+    if(newindex != 1){
+      heapify(index, input);
+    }
+    
+  }
+  
+ }
+
+
