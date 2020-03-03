@@ -1,20 +1,24 @@
-//node class with left and right pointers
 #include<iostream>
 using namespace std;
 class node{
- public:
+ public: //functions
+  node(char* k);
+  ~node();
   node* getLeft();
   node* getRight();
   node* getnext();
   void setLeft(node* k);
   void setNext(node* k);
+  node* getNext();
   void setRight(node*k);
   char getValue();
- private:
+  char* getToken();
+  void setToken(char* k);
+ private: //values
   node* left;
   node* right;
   node* next;
-  char token;
+  char* token;
 
 
 
