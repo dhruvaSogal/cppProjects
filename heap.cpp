@@ -12,6 +12,9 @@ int main(){
   int count = 0;
   int index = 0;
   int* input = new int[100];
+  for(int i = 0; i < 100; i++){
+    input[i] = 0;
+  }
   read(input, count, index);
   for(int i = 1; i< index; i++){
   removeNode(index, input);
@@ -72,15 +75,18 @@ void read(int* &input, int &count, int &index){
     else{
       int a;
       //char a;
-      int x  = 0;
+      //int x  = 0;
       //int count = 0;
       index = 1;
       while(infile >> a){
 	input[index] = a;
+	
 	//sort until smaller than parent or in 1 spot
-	if(index != 1){
+	//cout<<a<<"----------------"<<endl;
+	
+	  
 	heapify(index, input);
-	}
+	//cout<<index<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 
 	index ++;
       
@@ -97,25 +103,34 @@ void read(int* &input, int &count, int &index){
 }
 
 void heapify(int index, int* &input){
-  if(input[index] > input[(int)floor(index/2)]){//if larger than parent
+
+  //cout<<input[index]<<"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"<<endl;
+  //cout<<index<<"fffffffffffffffffffffffffffffffffffff"<<endl;
+if(input[index] > input[(int)floor(index/2)] && index != 1){//if larger than parent
     int temp = input[index];
+    //cout<<temp<<" temp"<<endl;
     input[index] = input[(int)floor(index/2)];
     input[(int)floor(index/2)] = temp;
-    
-    
+    //cout<<input[index]<<"swap"<<input[(int)floor(index/2)]<<endl;
+    //cout<<index<<"index"<<endl;
+
+    if(index != 1){
       heapify((int)floor(index/2) , input);
-    
+    }
     
   }
   
  }
 
 void removeNode(int index, int* &input){ //by the time this function is called index should reflect the number of elements in the array
-  input[1] = input[index];
+  cout<<input[1]<<endl;
+  input[1] = input[index]; //set to right most point
+  reheap(1, input);
+
   
   
 }
-/*void reheap(int x , int* &input){
+void reheap(int x , int* &input){
   if(input[x] < input[x * 2]){
     int temp = input[x];
     input[x] = input[x*2]; //swap
@@ -126,11 +141,16 @@ void removeNode(int index, int* &input){ //by the time this function is called i
     
 
   }
-  if(input[x] < input[x * 2 + 1]){
-    int temp = input[x];
-    input[x] = input[x*2 + 1]; //swap
-    input[x * 2 + 1] = temp;
-    reheap(input[x*2 + 1], input);
+  int spot = 0;
+  if(input[x] < input[x * 2 + 1] || input[x] < input[x * 2]){
+    if(input[x * 2 + 1] > input[x * 2]){
+      spot = x * 2 + 1;
+      //swap with child and recursively continue this process until not true
+
+    }
+    else if(input[x * 2 + 1] < input[x * 2]){
+      spot = x * 2;
+    }
     
 
     
@@ -139,5 +159,5 @@ void removeNode(int index, int* &input){ //by the time this function is called i
 
 }
 
-*/
+
 
