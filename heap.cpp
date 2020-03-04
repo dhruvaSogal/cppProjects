@@ -6,12 +6,16 @@
 using namespace std;
 void read(int* &input, int &count, int &index);
 void heapify(int index, int* &input);
+void removeNode(int index, int* &input);
+void reheap(int x , int* &input);
 int main(){
   int count = 0;
   int index = 0;
   int* input = new int[100];
   read(input, count, index);
-
+  for(int i = 1; i< index; i++){
+  removeNode(index, input);
+  }
 
 
 
@@ -79,4 +83,34 @@ void heapify(int index, int* &input){
   
  }
 
+void removeNode(int index, int* &input){ //by the time this function is called index should reflect the number of elements in the array
+  input[1] = input[index];
+  
+  
+}
+/*void reheap(int x , int* &input){
+  if(input[x] < input[x * 2]){
+    int temp = input[x];
+    input[x] = input[x*2]; //swap
+    input[x * 2] = temp;
+    reheap(input[x*2], input);
+    
+
+    
+
+  }
+  if(input[x] < input[x * 2 + 1]){
+    int temp = input[x];
+    input[x] = input[x*2 + 1]; //swap
+    input[x * 2 + 1] = temp;
+    reheap(input[x*2 + 1], input);
+    
+
+    
+
+  }
+
+}
+
+*/
 
