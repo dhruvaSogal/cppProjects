@@ -27,7 +27,34 @@ void read(int* &input, int &count, int &index){
   int entry = 0;
   cin>>entry;
   if(entry == 1){ //manual entry
+    cout<<"Enter numbers seperated by spaces"<<endl;
+    char* in = new char[100];
+    cin.ignore();
+    cin.get(in, 100);
+    
 
+    ofstream file;
+    file.open("fileqwer");
+    file<<in;
+    file.close();
+    ifstream infile;
+    infile.open("fileqwer");
+    int a;
+      //char a;
+      int x  = 0;
+      //int count = 0;
+      index = 1;
+      while(infile >> a){
+	input[index] = a;
+	//sort until smaller than parent or in 1 spot
+	if(index != 1){
+	heapify(index, input);
+	}
+
+	index ++;
+      
+
+      }
 
   }
   if(entry == 2){ //file entry
