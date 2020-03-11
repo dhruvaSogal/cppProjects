@@ -4,14 +4,6 @@ node::node(char* k){
   token = k;
 
 }
-node::~node(){
-  delete next;
-  delete right;
-  delete left;
-  delete token;
-
-
-}
 char* node :: getToken(){
   return token;
 
