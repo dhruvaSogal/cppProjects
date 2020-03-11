@@ -62,9 +62,7 @@ void read(node* root){
   }
 }//end read method
 void insert(int a , node* current, node* &root){
-  if(root != NULL){
-    cout<<current->value<<"x"<<endl;
-  }
+ 
   if(root == NULL){ //if first node in tree
     cout<<a<<endl;
         node* temp = new node;
@@ -86,8 +84,19 @@ void insert(int a , node* current, node* &root){
     }
 
   }
+  else if(a > current->value){
+    if(current->right == NULL){
+      node* temp = new node;
+      temp->value = a;
+      current->right = temp;
+    }
+    else{
+      insert(a, current->left, root);
+    }
 
-  
+  }
+
+  cout<<current->value<<endl; 
 }
 void print(node* current){
   if(current == NULL){
