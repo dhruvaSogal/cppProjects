@@ -14,9 +14,9 @@ void print(node* current);
 int main(){
   cout<<"This Program Creates a Binary Search Tree"<<endl;
   node* root = new node;
-  root->right = NULL;
-  root->left = NULL;
-  root->value = 0;        //0 used if node is empty as input must me 1 to 1000
+  //root->right = NULL;
+  //root->left = NULL;
+  root = NULL;        //0 used if node is empty as input must me 1 to 1000
   read(root);
   print(root);
 
@@ -41,9 +41,8 @@ void read(node* root){
     infile.open("treefile");
     int a;
     while(infile >> a){
-      if(a != 0){
+      //  cout<<a<<endl;
       insert(a, root, root);   
-      }
     }
 
   }
@@ -63,50 +62,35 @@ void read(node* root){
   }
 }//end read method
 void insert(int a , node* current, node* &root){
-  cout<<a<<endl;
-  cout<<current->value<<endl;
-  if(root->value == 0){ //if first node in tree
-	node* temp = new node;
+  if(root != NULL){
+    cout<<current->value<<"x"<<endl;
+  }
+  if(root == NULL){ //if first node in tree
+    cout<<a<<endl;
+        node* temp = new node;
 	temp->value = a;
 	root = temp;
+	cout<<root->value<<"l"<<endl;
+	
       }
 
- else{
-  if(a < current->value){
-    if(current->left != 0){ //if not the last row of tree
-      insert(a, current->left, root);
-
-    }
-    else{
+  else if(a < current->value){ //if belongs on left of current
+    if(current->left == NULL){
       node* temp = new node;
       temp->value = a;
       current->left = temp;
     }
-
-  }
-  else{ //equal to or greater than
-    if(current->right != 0){
-      insert(a, current->right, root);
-    }
     else{
-      node* temp = new node;
-      temp->value = a;
-      current->right = temp;
-      
-    }
-    
+      insert(a, current->left, root);
 
+    }
 
   }
 
-
-
-
-
- }
+  
 }
 void print(node* current){
-  if(current->value == 0){
+  if(current == NULL){
     return;
   }
   print(current->left);
