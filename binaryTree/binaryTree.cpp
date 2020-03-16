@@ -9,21 +9,26 @@ struct node{
 
 };
 void insert(int a , node* current, node* &root);
-void read(node* root);
-void print(node* current);
+void read(node* &root);
+void print(node* current, int space);
+void search(int key, node* current);
 int main(){
+  
   cout<<"This Program Creates a Binary Search Tree"<<endl;
   node* root = new node;
   //root->right = NULL;
   //root->left = NULL;
   root = NULL;        //0 used if node is empty as input must me 1 to 1000
   read(root);
-  print(root);
+  print(root, 0);
+  search(4, root);
+  
+  //cout<<"root"<<endl;
 
 
 
 }
-void read(node* root){
+void read(node* &root){
   cout<<"Enter 1 for console entry or 2 for file input"<<endl;
   int entry = 0;
   //cin.ignore();
@@ -41,7 +46,7 @@ void read(node* root){
     infile.open("treefile");
     int a;
     while(infile >> a){
-      //  cout<<a<<endl;
+      //cout<<a<<endl;
       insert(a, root, root);   
     }
 
@@ -62,50 +67,124 @@ void read(node* root){
   }
 }//end read method
 void insert(int a , node* current, node* &root){
- 
+  //cout<<a<<endl;
   if(root == NULL){ //if first node in tree
-    cout<<a<<endl;
-        node* temp = new node;
-	temp->value = a;
-	root = temp;
-	cout<<root->value<<"l"<<endl;
-	
-      }
-
-  else if(a < current->value){ //if belongs on left of current
-    if(current->left == NULL){
+    cout<<"new root: "<<a<<endl;
+    node* temp = new node;
+    temp->value = a;
+    root = temp;
+    
+  }
+  else{
+    if(a < current->value){
+      if(current->left == NULL){
       node* temp = new node;
       temp->value = a;
       current->left = temp;
-    }
-    else{
-      insert(a, current->left, root);
+      }
+      else{
+	insert(a, current->left, root);
+      }
 
     }
-
-  }
-  else if(a > current->value){
-    if(current->right == NULL){
+    else if(a > current->value){ //a is more than or equal to
+      if(current->right == NULL){
       node* temp = new node;
       temp->value = a;
       current->right = temp;
+      }
+      else{
+	insert(a, current->right, root);
+      }
+
+
+
     }
-    else{
-      insert(a, current->left, root);
-    }
+
+
+
+
+
+
 
   }
-
-  cout<<current->value<<endl; 
+  
 }
-void print(node* current){
+
+
+void print(node* current, int space){ //this method is taken from "Geeks for Geeks" https://www.geeksforgeeks.org/print-binary-tree-2-dimensions/
   if(current == NULL){
     return;
   }
-  print(current->left);
-  cout<<current->value<<',';
-  print(current->right);
 
+  space += 10;
   
+  print(current->right, space);
+  cout<<endl;
+  for (int i = 10; i < space; i++){  
+    cout<<" ";
+  }
+    cout<<current->value<<"\n";  
+    print(current->left, space); 
+
 
 }
+void search(int key, node* current){
+  if(current == NULL){
+    cout<<"No such element exists in the tree"<<endl;
+    return;
+  }
+  if(key == current->value){
+    cout<<"The searched number exists in the tree"<<endl;
+  }
+  else{
+    if(key > current->value){
+      search(key, current->right);
+    }
+    if(key < current->value){
+      search(key, current->left);
+    }
+  }
+  
+
+
+  
+}
+void deleteLeaf(int key, node* current){
+  //node is leaf
+
+  //search to establish if in tree
+  if(current == NULL){
+    cout<<"No such element exists in the tree"<<endl;
+    return;
+  }
+  if(key == current->value){
+    //located node
+    if(current->right == NULL && current->left == NULL)
+
+
+
+
+
+
+
+
+
+
+
+  }
+  else{
+    if(key > current->value){
+      search(key, current->right);
+    }
+    if(key < current->value){
+      search(key, current->left);
+    }
+  }
+
+}
+
+
+
+
+
