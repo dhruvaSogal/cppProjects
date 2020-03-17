@@ -14,22 +14,45 @@ void print(node* current, int space);
 void search(int key, node* current);
 void deleteLeaf(int key, node* &current, node* &root);
 node* findInorderSuccesor(node* c);
-void deleteInorderSuccesor(node* c);
+void deleteInorderSuccesor(node* &c);
 int main(){
   
   cout<<"This Program Creates a Binary Search Tree"<<endl;
+  bool running = true;
   node* root = new node;
-  //root->right = NULL;
-  //root->left = NULL;
   root = NULL;        //0 used if node is empty as input must me 1 to 1000
-  read(root);
-  print(root, 0);
-  search(4, root);
-  deleteLeaf(4, root, root);
-  print(root, 0);
-  //cout<<"root"<<endl;
+  
+  while(running == true){
+    cout<<"Type 1 to read, 2 to print, 3 to delete, 4 to search, or 5 to quit"<<endl;
 
-
+    int command = 0;
+    cin>>command;
+    if(command == 1){
+      read(root);
+    }
+    if(command == 2){
+      print(root, 0);
+    }
+    if(command ==3){
+      cout<<"enter the number you wish to delete"<<endl;
+      int k;
+      cin>>k;
+      deleteLeaf(k, root, root);
+    }
+    if(command == 4){
+      cout<<"enter the number you wish to seach for"<<endl;
+      int k;
+      cin>>k;
+      search(k, root);
+      
+    }
+    if(command==5){
+      running =false;
+    }
+    
+  
+  
+  }
 
 }
 void read(node* &root){
@@ -63,10 +86,15 @@ void read(node* &root){
     cin.get(filename, 100);
     ifstream infile;
     infile.open(filename);
-    int a;
-    while(infile >> a){
-      //sort into tree
-      //call a method and recursively find spot
+    if(infile.fail()){
+      cout<<"no such file exists"<<endl;
+    }
+    
+    else{
+      int a;
+      while(infile >> a){
+      insert(a, root, root);
+      }
     }
   }
 }//end read method
@@ -180,8 +208,10 @@ void deleteLeaf(int key, node* &current, node* &root){
        current->left = NULL;
      }
      else if(current->right != NULL && current->left != NULL){
-       root->value = findInorderSuccesor(root)->value;
-       deleteInorderSuccesor(root);
+       node* k = new node;
+       k = root;
+       root->value = findInorderSuccesor(root)->value; 
+       deleteInorderSuccesor(k);
        
      }
 
@@ -206,7 +236,10 @@ void deleteLeaf(int key, node* &current, node* &root){
     }
     else if(current->right != NULL && current->left != NULL){
     //if has two children find inorder succesor, copy value, delete successor
-      
+      node* k = new node;
+       k = current;
+       current->value = findInorderSuccesor(current)->value; 
+       deleteInorderSuccesor(k);
       
       
     
@@ -241,7 +274,7 @@ node* findInorderSuccesor(node* c){
   findInorderSuccesor(c->right);
   
 }
-void deleteInorderSuccesor(node* c){
+void deleteInorderSuccesor(node* &c){
   if(c->right == NULL){
     c = NULL;
     return;
