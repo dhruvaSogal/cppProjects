@@ -1,4 +1,5 @@
-//Dhruva Sogal Binary Tree Project Started 3/5/2020
+//Dhruva Sogal Binary Tree Project Started 3/5/2020. This program reads in an input and constructs a binary search tree
+//The tree can be searched, elements can be deleted and the tree can be printed
 #include<iostream>
 #include<fstream>
 using namespace std;
@@ -55,7 +56,7 @@ int main(){
   }
 
 }
-void read(node* &root){
+void read(node* &root){ //reads input and calls insert method
   cout<<"Enter 1 for console entry or 2 for file input"<<endl;
   int entry = 0;
   //cin.ignore();
@@ -98,7 +99,7 @@ void read(node* &root){
     }
   }
 }//end read method
-void insert(int a , node* current, node* &root){
+void insert(int a , node* current, node* &root){ //inserts elements appropriately into tree
   //cout<<a<<endl;
   if(root == NULL){ //if first node in tree
     cout<<"new root: "<<a<<endl;
@@ -161,7 +162,7 @@ void print(node* current, int space){ //this method is taken from "Geeks for Gee
 
 
 }
-void search(int key, node* current){
+void search(int key, node* current){ //searches tree
   if(current == NULL){
     cout<<"No such element exists in the tree"<<endl;
     return;
@@ -170,7 +171,7 @@ void search(int key, node* current){
     cout<<"The searched number exists in the tree"<<endl;
   }
   else{
-    if(key > current->value){
+    if(key > current->value){          //uses right more than/left less than property of tree to recursively search
       search(key, current->right);
     }
     if(key < current->value){
@@ -182,7 +183,7 @@ void search(int key, node* current){
 
   
 }
-void deleteLeaf(int key, node* &current, node* &root){
+void deleteLeaf(int key, node* &current, node* &root){ //deletes an element
   
 
   //node is leaf
@@ -194,12 +195,12 @@ void deleteLeaf(int key, node* &current, node* &root){
   }
   
   if(key == current->value){
-   if(current == root){
-     if(current->left == NULL && current->right == NULL){
+    if(current == root){ //what to do if root must be deleted
+      if(current->left == NULL && current->right == NULL){ //lone root
        current = NULL;
 
      }
-     else if(current->left == NULL && current->right != NULL){
+      else if(current->left == NULL && current->right != NULL){ //if only has left or right
        root->value = current->right->value;
        current->right = NULL;
      }
@@ -207,7 +208,7 @@ void deleteLeaf(int key, node* &current, node* &root){
        root->value = current->left->value;
        current->left = NULL;
      }
-     else if(current->right != NULL && current->left != NULL){
+     else if(current->right != NULL && current->left != NULL){ //if it has both
        node* k = new node;
        k = root;
        root->value = findInorderSuccesor(root)->value; 
@@ -267,14 +268,14 @@ void deleteLeaf(int key, node* &current, node* &root){
 
 }
 
-node* findInorderSuccesor(node* c){
+node* findInorderSuccesor(node* c){ //finds the succesor in order of node to be deleted
   if(c->right == NULL){
     return c;
   }
   findInorderSuccesor(c->right);
   
 }
-void deleteInorderSuccesor(node* &c){
+void deleteInorderSuccesor(node* &c){ //finds and deletes the inorder succesor, called after copying value
   if(c->right == NULL){
     c = NULL;
     return;
