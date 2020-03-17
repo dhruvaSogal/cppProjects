@@ -12,8 +12,9 @@ void insert(int a , node* current, node* &root);
 void read(node* &root);
 void print(node* current, int space);
 void search(int key, node* current);
-void deleteLeaf(int key, node* &current);
+void deleteLeaf(int key, node* &current, node* &root);
 node* findInorderSuccesor(node* c);
+void deleteInorderSuccesor(node* c);
 int main(){
   
   cout<<"This Program Creates a Binary Search Tree"<<endl;
@@ -24,7 +25,7 @@ int main(){
   read(root);
   print(root, 0);
   search(4, root);
-  deleteLeaf(4, root);
+  deleteLeaf(4, root, root);
   print(root, 0);
   //cout<<"root"<<endl;
 
@@ -153,7 +154,9 @@ void search(int key, node* current){
 
   
 }
-void deleteLeaf(int key, node* &current){
+void deleteLeaf(int key, node* &current, node* &root){
+  
+
   //node is leaf
 
   //search to establish if in tree
@@ -161,16 +164,40 @@ void deleteLeaf(int key, node* &current){
     cout<<"No such element exists in the tree"<<endl;
     return;
   }
+  
   if(key == current->value){
+   if(current == root){
+     if(current->left == NULL && current->right == NULL){
+       current = NULL;
+
+     }
+     else if(current->left == NULL && current->right != NULL){
+       root->value = current->right->value;
+       current->right = NULL;
+     }
+     else if(current->right == NULL && current->left != NULL){
+       root->value = current->left->value;
+       current->left = NULL;
+     }
+     else if(current->right != NULL && current->left != NULL){
+       root->value = findInorderSuccesor(root)->value;
+       deleteInorderSuccesor(root);
+       
+     }
+
+
+
+   }
+    else{
     //located node
     if(current->right == NULL && current->left == NULL){ //if leafe delete
-      cout<<"leaf"<<endl;
+      //cout<<"leaf"<<endl;
       //delete (current);
       current = NULL;
     }
     else if(current->right == NULL && current->left != NULL){ //only has left child
       current->value = current->left->value;
-      delete (current->left);
+      current->left = NULL;
     }
     else if(current->left == NULL && current->right != NULL){ //only has right child
       current->value = current->right->value;
@@ -179,9 +206,9 @@ void deleteLeaf(int key, node* &current){
     }
     else if(current->right != NULL && current->left != NULL){
     //if has two children find inorder succesor, copy value, delete successor
-    node* sccsr = findInorderSuccesor(current);
-    current->value = sccsr->value;
-    delete(findInorderSuccesor(current));
+      
+      
+      
     
     }
 
@@ -190,7 +217,7 @@ void deleteLeaf(int key, node* &current){
 
 
 
-
+    }
 
 
 
@@ -198,10 +225,10 @@ void deleteLeaf(int key, node* &current){
   else{
     //cout<<findInorderSuccesor(current)->value<<endl;
     if(key > current->value){
-      deleteLeaf(key, current->right);
+      deleteLeaf(key, current->right, root);
     }
     if(key < current->value){
-      deleteLeaf(key, current->left);
+      deleteLeaf(key, current->left, root);
     }
   }
 
@@ -211,9 +238,16 @@ node* findInorderSuccesor(node* c){
   if(c->right == NULL){
     return c;
   }
-  findInorderSuccesor(c->left);
+  findInorderSuccesor(c->right);
   
 }
+void deleteInorderSuccesor(node* c){
+  if(c->right == NULL){
+    c = NULL;
+    return;
+  }
+  deleteInorderSuccesor(c->right);
 
+}
 
 
