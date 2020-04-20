@@ -82,44 +82,58 @@ void read(node* &root){ //reads input and calls insert method
   }
 }//end read method
 void insert(node* a , node* current, node* &root){ //inserts elements appropriately into tree
-  if(root != NULL){
-    
-    if(a->value < root->value){
-      if(root->left != NULL){
+  if(root == NULL){
+    root = a;
+  }
+  else{ //root not equal to NULL
+    if(a->value < current->value){
+      if(current->left != NULL){
 	insert(a, current->left, root);
-	return;
 
       }
-       else{
-	 current->left = a;
-	 a->parent = current;
-	 a->color = 'r';
-	 a->right = NULL;
-	 a->left = NULL;
-       }
+      else{
+	current->left = a;
+	a->parent = current;
+	a->left = NULL;
+	a->right = NULL;
+
+      }
     }
-    else if(a->value > root->value || a->value < root->value){
-	  if(root->right != NULL){
-	    insert(a, current->right, root);
-	  }
-	  else{
-	    current->right = a;
-	    a->parent = current;
-	    a->color = 'r';
-	    a->right = NULL;
-	    a->left = NULL;
 
-	  }
+      else if(a->value > current->value || a->value == current->value){
+	if(current->right != NULL){
+	insert(a, current->right, root);
 
-	}
-      
-      
+      }
+      else{
+	current->right = a;
+	a->parent = current;
+	a->left = NULL;
+	a->right = NULL;
+
+      }
+	
+
       }
 
 
+    }
+    
 
 
-}//close insert
+
+  }
+
+
+
+
+  
+  
+
+
+
+
+//close insert
   
 
     
@@ -316,7 +330,7 @@ void rotateRight(node* k){
 
 }
 void print(node* current, int space){ //this method is taken from "Geeks for Geeks" https://www.geeksforgeeks.org/print-binary-tree-2-dimensions/
-  if(current == NULL){
+  /* if(current == NULL){
     return;
   }
 
@@ -326,9 +340,9 @@ void print(node* current, int space){ //this method is taken from "Geeks for Gee
   cout<<endl;
   for (int i = 10; i < space; i++){  
     cout<<" ";
-  }
+    } */
     cout<<current->value<<"\n";  
-    print(current->left, space); 
+    // print(current->left, space); 
 
 
 }
