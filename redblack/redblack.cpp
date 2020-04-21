@@ -1,8 +1,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <assert.h>
 using namespace std;
-
 struct node{
   int value;
   node* right;
@@ -23,7 +23,7 @@ void rotateLeft(node* k);
 void insert(node* a , node* current, node* &root);
 void insertFix(node* k, node* &root);
 void print(node* current, int space);
-void add(int x, node* root);
+void add(int x, node* &root);
  int main(){
   node* root = NULL;
   //root->color = 'b';
@@ -148,7 +148,7 @@ void insert(node* a , node* current, node* &root){ //inserts elements appropriat
     }
     
 
-
+  a->color = 'r';
 
   }
 
@@ -179,7 +179,7 @@ void fix(node* root, node* k){
   
   if(k->parent == NULL){
     k->color = 'b';
-    return;
+        
   }
   else if(k->parent->color == 'b'){
     return;
@@ -205,7 +205,7 @@ void fix(node* root, node* k){
     }
     
     
-    if(k == p->left && p == g->right){
+    else if(k == p->left && p == g->right){
       rotateRight(p);
       k = k->right;
 
@@ -308,7 +308,8 @@ void rotateLeft(node* k){
   if(k != NULL){
   node* temp = k->right;
   node* p = k->parent;
-
+  assert(temp != NULL);
+  
   k->right = temp->left;
   temp->left = k;
   k->parent = temp;
@@ -338,6 +339,7 @@ void rotateLeft(node* k){
 void rotateRight(node* k){
   node* temp = k->left;
   node* p = k->parent;
+  assert(temp != NULL);
 
   k->left = temp->right;
   temp->right = k;
@@ -381,7 +383,7 @@ void print(node* current, int space){ //this method is taken from "Geeks for Gee
 
 
 }
-void add(int x, node* root){
+void add(int x, node* &root){
   node* k = new node;
   k->value = x;
   insertFix(k, root);
