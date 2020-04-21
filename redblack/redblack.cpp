@@ -21,14 +21,41 @@ node* getGrandparent(node* k);
 void rotateRight(node* k);
 void rotateLeft(node* k);
 void insert(node* a , node* current, node* &root);
-void insertFix(node* k, node* root);
+void insertFix(node* k, node* &root);
 void print(node* current, int space);
+void add(int x, node* root);
  int main(){
   node* root = NULL;
   //root->color = 'b';
-  read(root);
-  print(root, 0);
+  cout<<"Enter 'a' for add, 'p' for print, 'r' for read, or q to quit"<<endl;
+  char com;
+  while(true){
+  cin>>com;
 
+
+  if(com == 'a'){
+    cout<<"Enter the number you wish to add"<<endl;
+    int z;
+    cin>>z;
+    add(z, root);
+
+  }
+  if(com == 'p'){
+    print(root, 0);
+
+  }
+  if(com == 'r'){
+    read(root);
+  }
+  if(com == 'q'){
+    break;
+
+  }
+
+  
+  
+  
+  }
 
 
 
@@ -81,6 +108,7 @@ void read(node* &root){ //reads input and calls insert method
     }
   }
 }//end read method
+
 void insert(node* a , node* current, node* &root){ //inserts elements appropriately into tree
   if(root == NULL){
     root = a;
@@ -127,17 +155,20 @@ void insert(node* a , node* current, node* &root){ //inserts elements appropriat
 
 
 
-  
-  
 
 
 
 
-//close insert
-  
 
-    
-  
+
+
+
+
+
+
+
+
+
 
 
 
@@ -145,11 +176,12 @@ void insert(node* a , node* current, node* &root){ //inserts elements appropriat
 
   
 void fix(node* root, node* k){
-  if(k == root){
+  
+  if(k->parent == NULL){
     k->color = 'b';
     return;
   }
-  else if(k->parent!=NULL && k->parent->color == 'b'){
+  else if(k->parent->color == 'b'){
     return;
     
   }
@@ -165,16 +197,16 @@ void fix(node* root, node* k){
       
     node* p = k->parent;
     node* g = getGrandparent(k);
-    if(p!= NULL && g != NULL){ 
+    if(p != NULL && g != NULL){ 
     if(k == p->right && p == g->left){
-      //rotate left(k)
+      rotateLeft(p);
       k = k->left;
 
     }
     
     
     if(k == p->left && p == g->right){
-      rotateRight(k);
+      rotateRight(p);
       k = k->right;
 
     }
@@ -217,10 +249,13 @@ void step2(node* k){
 
 }
 
-void insertFix(node* k, node* root){
+void insertFix(node* k, node* &root){
   insert(k, root, root);
   fix(root, k);
-
+  root = k;
+  while(root->parent != NULL){
+    root = root->parent;
+  }
 
 
 
@@ -298,7 +333,7 @@ void rotateLeft(node* k){
   }
   temp->parent = p;
   }
-
+  //cout<<"r"<<endl;
 }
 void rotateRight(node* k){
   node* temp = k->left;
@@ -327,10 +362,10 @@ void rotateRight(node* k){
 
   }
   temp->parent = p;
-
+  
 }
 void print(node* current, int space){ //this method is taken from "Geeks for Geeks" https://www.geeksforgeeks.org/print-binary-tree-2-dimensions/
-  /* if(current == NULL){
+   if(current == NULL){
     return;
   }
 
@@ -340,9 +375,16 @@ void print(node* current, int space){ //this method is taken from "Geeks for Gee
   cout<<endl;
   for (int i = 10; i < space; i++){  
     cout<<" ";
-    } */
+    } 
     cout<<current->value<<"\n";  
-    // print(current->left, space); 
+     print(current->left, space); 
+
+
+}
+void add(int x, node* root){
+  node* k = new node;
+  k->value = x;
+  insertFix(k, root);
 
 
 }
