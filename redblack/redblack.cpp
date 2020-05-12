@@ -13,7 +13,7 @@ struct node{
 };
 void rotateRight(node* k);
 void read(node* &root);
-void fix(node* root, node* k);
+void fix(node* &root, node* k);
 void step2(node* k);
 node* getSibiling(node* root, node* k);
 node* getUncle(node* root, node* k);
@@ -24,10 +24,20 @@ void insert(node* a , node* current, node* &root);
 void insertFix(node* k, node* &root);
 void print(node* current, int space);
 void add(int x, node* &root);
- int main(){
+void ReplaceNode(node*k, node* child);
+void deleteChild(node* root, node* k);
+void deleteCase1(node* root, node* k);
+void deleteCase2(node* root, node* k);
+void deleteCase3(node* root, node* k);
+void deleteCase4(node* root, node* k);
+void deleteCase5(node* root, node* k);
+void deleteCase6(node* root, node*k);
+void search(int key, node* current);
+void deleteNode(int key, node* current, node* root);
+int main(){
   node* root = NULL;
   //root->color = 'b';
-  cout<<"Enter 'a' for add, 'p' for print, 'r' for read, or q to quit"<<endl;
+  cout<<"Enter 'a' for add, 'p' for print, 'r' for read, 's' to search, 'd' to delete or q to quit"<<endl;
   char com;
   while(true){
   cin>>com;
@@ -46,6 +56,19 @@ void add(int x, node* &root);
   }
   if(com == 'r'){
     read(root);
+    cout<<root->value<<endl;
+  }
+  if(com == 'd'){
+    cout<<"enter the number you wish to delete"<<endl;
+    int n;
+    cin>>n;
+    deleteNode(n, root, root);
+  }
+  if(com == 's'){
+    cout<<"enter the number you wish to find"<<endl;
+    int n;
+    cin>>n;
+    search(n, root);
   }
   if(com == 'q'){
     break;
@@ -153,29 +176,7 @@ void insert(node* a , node* current, node* &root){ //inserts elements appropriat
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-void fix(node* root, node* k){
+void fix(node* &root, node* k){
   
   if(k->parent == NULL){
     k->color = 'b';
@@ -230,13 +231,12 @@ void step2(node* k){
    node* p = k->parent;
    node* g = getGrandparent(k);
    if( p != NULL && g != NULL){   
-   if(p!= NULL){
-   if(k == p->left){
+    if(k == p->left){
      rotateRight(g);
 
 
    }
-   }
+   
    else{
      rotateLeft(g);
 
@@ -390,3 +390,218 @@ void add(int x, node* &root){
 
 
 }
+
+void ReplaceNode(node*k, node* child){
+  child->parent = k->parent;
+  if(k==k->parent->left){
+    k->parent->left = child;
+  }
+  else{
+    k->parent->right = child;
+
+  }
+
+}
+void deleteChild(node* root, node* k){
+  node* child = (k->right == NULL) ? k->left : k->right; //child is whichevre child is not NULL
+  assert(child);
+  ReplaceNode(k, child);
+  if(k->color == 'b'){
+    if(child->color == 'r'){
+      child->color = 'b';
+
+    }
+    else{
+      deleteCase1(root, k); 
+
+    }
+
+
+  }
+
+
+
+}
+
+void deleteCase1(node* root, node* k){
+  if(k->parent != NULL){
+    deleteCase2(root, k);
+  }
+
+
+}
+void deleteCase2(node* root, node* k){
+  node* s = getSibiling(root, k);
+  if(s != NULL){ 
+  if(s->color == 'r'){
+    k->parent->color = 'r';
+    s->color = 'b';
+    if(k == k->parent->left){
+      rotateLeft(k->parent);
+
+    }
+    else{
+      rotateRight(k->parent);
+
+    }
+
+  }
+  deleteCase3(root, k);
+  }
+}
+
+
+void deleteCase3(node* root, node* k){
+  node* s = getSibiling(root, k);
+  if(s!= NULL){
+  if((k->parent->color == 'b') && (s->color == 'b') && (s->left->color == 'b') && (s->right->color == 'b')){
+    s->color = 'r';
+    deleteCase1(root, k);
+
+  }
+  else{
+    deleteCase4(root, k);
+    
+  }
+
+
+  }
+
+}
+
+
+
+void deleteCase4(node* root, node* k){
+  node* s = getSibiling(root, k);
+  if( s!= NULL){
+    if((k->parent->color = 'r') && (s->color == 'b') && (s->left->color == 'b') && (s->right->color == 'b')){
+    s->color = 'r';
+    k->parent->color = 'b';
+  }
+    else{
+      deleteCase5(root, k);
+
+    }
+
+
+  }
+  
+
+
+}
+
+void deleteCase5(node* root, node* k){
+  node* s = getSibiling(root, k);
+  //this code sets up case 6 to execute correctly
+  if(s != NULL){
+  if(s->color == 'b'){
+    if((k == k->parent->left) && (s->right->color == 'b') && (s->left->color == 'r')){
+      s->color = 'r';
+      s->left->color = 'b';
+      rotateRight(s);
+    }
+  }
+  deleteCase6(root, k);
+
+
+
+    }
+
+
+
+
+
+  }
+  
+
+
+
+
+void deleteCase6(node* root, node*k){
+  node* s = getSibiling(root, k);
+  if(s != NULL){
+    s->color = k->parent->color;
+    k->parent->color = 'b';
+
+    if((k == k->parent->left)){
+	s->right->color = 'b';
+	rotateLeft(k->parent);
+
+
+
+      }
+      else{
+	s->left->color = 'b';
+	rotateRight(k->parent);
+
+
+      }
+
+	
+
+
+
+
+
+    
+  }
+}
+
+void search(int key, node* current){
+  if(current == NULL){
+    cout<<"No such element exists in the tree"<<endl;
+    return;
+
+  }
+ if(key == current->value){
+    cout<<"The searched number exists in the tree"<<endl;
+  }
+  else{
+    if(key > current->value){          //uses right more than/left less than property of tree to recursively search
+      search(key, current->right);
+    }
+    if(key < current->value){
+      search(key, current->left);
+    }
+  }
+  
+
+
+  
+}  
+  
+
+
+
+
+
+
+
+
+void deleteNode(int key, node* current, node* root){
+ if(current == NULL){
+    cout<<"No such element exists in the tree"<<endl;
+    return;
+
+  }
+ if(key == current->value){
+   deleteChild(root, current);
+  }
+  else{
+    if(key > current->value){          //uses right more than/left less than property of tree to recursively search
+      deleteNode(key, current->right, root);
+    }
+    if(key < current->value){
+      deleteNode(key, current->left, root);
+    }
+  }
+  
+
+
+  
+} 
+
+
+
+
+
