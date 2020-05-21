@@ -108,6 +108,9 @@ void read(node* &root){ //reads input and calls insert method
       //cout<<a<<endl;
       node* k = new node;
       k->value = a;
+      k->left = NULL;
+      k->right = NULL;
+      k->parent = NULL;
       insertFix(k, root);
     }
 
@@ -129,6 +132,10 @@ void read(node* &root){ //reads input and calls insert method
       while(infile >> a){
       node* k = new node;
       k->value = a;
+      k->left = NULL;
+      k->right = NULL;
+      k->parent = NULL;
+
       insertFix(k, root);
       }
     }
@@ -380,10 +387,15 @@ void print(node* current, int space){ //this method is taken from "Geeks for Gee
   cout<<endl;
   for (int i = 10; i < space; i++){  
     cout<<" ";
-    } 
-    cout<<current->value<<"\n";  
+    }
+  if(current->color == 'b'){
+    cout<<current->value<<"b"<<"\n";  
      print(current->left, space); 
-
+  }
+  if(current->color == 'r'){
+    cout<<current->value<<"r"<<"\n";  
+     print(current->left, space); 
+  }
 
 }
 void add(int x, node* &root){
